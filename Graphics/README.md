@@ -1,25 +1,43 @@
+g++ grid.cpp -o grid.exe
+
 # Graphics — Short Program Overview
 
-This folder contains small C/C++ graphics/demo programs. Below is a brief description of each file (short and inferred from filenames):
+Small C/C++ graphics demos using old-style BGI calls (e.g. `graphics.h`). Files in this folder:
 
-- `grid.cpp` — Draws or demonstrates a grid layout / grid-based graphics. Likely shows line drawing or tiled rendering.
-- `minorII.cpp` — A minor project or demo (second version). Possibly a small graphics assignment or practice program.
-- `ollee.cpp` — Short demo program (name suggests a small example or practice sketch); likely renders a shape or pattern.
-- `star.cpp` — Draws a star or star-shaped pattern; likely uses simple graphics primitives to render a star.
+- `brick.cpp` — Breakout/brick-breaker demo using BGI drawing primitives.
+- `grid.cpp` — Animated grid / square-diagonal drawing using `putpixel`.
+- `minorII.cpp` — Multi-part demo showing shapes, animations and basic BGI features.
+- `ollee.cpp` — Simple stick-figure animation (patting/head animation).
+- `star.cpp` — Galaxy/starfield animation using many `putpixel` calls and simple physics.
 
-How to run
+Quick notes (concise):
 
-- These are C/C++ source files. Compile with your compiler (e.g., `g++`) and run the produced executable. Example (PowerShell):
+- **Primary headers used:** `graphics.h`, `conio.h`, `dos.h` (sometimes), `stdio.h`, `stdlib.h`, `math.h`, `time.h`, `direct.h` (see sources).
+- **Graphics backend:** These programs use the Borland Graphics Interface (BGI) API. To compile/run on modern Windows with MinGW/GCC you will typically need a BGI-compatible library such as WinBGIm (or `libbgi`) or an equivalent compatibility layer.
+- **Platform inferred from code:** Windows-oriented (paths like `C:\TURBOC3\BGI` and BGI usage); keyboard input via `getch()`/`kbhit()`; typical target resolution ~640x480.
+
+Compile & run (Windows, MinGW + WinBGIm example):
 
 ```powershell
 cd "C:\Users\tanis\Documents\VISUAL_STUDIO\git_repo\C-C-Programs-\Graphics"
-# compile example
-g++ grid.cpp -o grid.exe
-# run
-.\grid.exe
+# Example compile (requires WinBGIm / libbgi available to the compiler)
+g++ brick.cpp -o brick.exe -lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32
+# Run
+.\brick.exe
 ```
 
-Notes
+If you don't have a BGI-compatible implementation installed, consider one of:
 
-- The descriptions above are concise inferences from filenames. Open a source file to see exact behavior and dependencies (some programs may rely on graphics libraries or Windows BGI).
-- If you want, I can add short one-line comments at the top of each file explaining exactly what each program does after inspecting the code.
+- Install WinBGIm / winbgim (a popular Win32 BGI port) and link with `-lbgi`.
+- Use a modern graphics library (SDL2, SFML, GLFW + OpenGL) and port the drawing calls.
+
+If you want, I can:
+
+- Prepend a one-line comment to each source file describing exactly what it does (I can do this automatically).
+- Prepare a short commit with the README update and other cleanup and push it — tell me the commit message and whether to push.
+
+This README is intentionally brief; open any file for exact behavior and required headers.
+
+AI-assisted development note
+
+- **Hybrid approach:** Some of the code in this folder was produced using a hybrid workflow combining human authorship and AI-assisted code generation (e.g., code suggestions from AI coding assistants). This approach is commonly used today to speed prototyping and reduce repetitive work.
